@@ -4,9 +4,9 @@ import argparse
 import yaml
 import json
 
-VERSION="v1.0.0"
+VERSION="v1.0.1"
 
-def mainCLI():
+def main():
     """
     Smry: CLIを処理する関数。
 
@@ -97,4 +97,4 @@ def directoryBFS(startDir:Path,maxDepth:int=None,isAll:bool=None):
 
 
 if(__name__=="__main__"):
-    mainCLI()
+    main()
