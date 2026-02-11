@@ -1,49 +1,42 @@
 # 概要
+
 ディレクトリの入れ子構造をJSONやYAMLで出力します。
 
 # インストール方法
+
 `pip install treejson-cli`
 
-## パッケージ依存性
+# 使用例
 
-以下のpackageをインストールしないと正しく機能しない場合があります。
-
-- [PyYAML](https://pypi.org/project/PyYAML/): 最も人気なPyhton用のYAMLパーサーです。
-
-# 実行方法
-`treejson <directory>`
-
-ディレクトリの構造をJSONに纏めて、標準出力する。
-
-## Options
-
-詳細仕様は[ここ](formal_document_JP.md)にあります。
-
-`[-h|--help]`
+`treejson [-h|--help]`
 
 helpを表示する。
 
-`[-v|--version]`
+`treejson [-v|--version]`
 
 versionを表示する。
 
-`[-y|--yaml]`
+`treejson <directory> [-y|--yaml] [-a|--all]`
 
-YAML形式で出力する。
+ディレクトリの構造をJSONに纏めて、標準出力する。
 
-`[-a|--all]`
+`-y`が指定された時は、YAML形式で出力する。
 
-隠しファイル('.'から始まるファイル)を表示する。
+`-a`が指定された時は、隠しファイル('.'から始まるファイル)を表示する。
 
-`[-d|--depth] <depth>`
+`treejson <directory> [-d|--depth] <depth>`
 
 探索の深さを指定する。
 
 深さ0の時はカレントディレクトリのみを表示する。
 
-`[-f|--file] <output_file>`
+`treejson <directory> [-f|--file] <file>`
 
-".json"(".yaml")ファイルを出力する。
+directory構造を\<file\>へを出力する。
+
+## Options
+
+詳細仕様は[ここ](formal_document_JP.md)にあります。
 
 ## 例
 - `treejson tests/sample`

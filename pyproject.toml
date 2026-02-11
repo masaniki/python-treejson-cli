@@ -25,7 +25,7 @@ license = "MIT"
 license-files = ["LICENCSE.txt"]
 
 [project.scripts]
-treejson = "main:mainCLI"
+treejson = "cli:main"
 
 [project.urls]
 Repository = "https://github.com/masaniki/python-treejson-cli"
