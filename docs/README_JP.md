@@ -2,6 +2,8 @@
 
 ディレクトリの入れ子構造をJSONやYAMLで出力します。
 
+英語のドキュメントは[ここ](../README.md)です。
+
 # インストール方法
 
 `pip install treejson-cli`
@@ -34,9 +36,6 @@ versionを表示する。
 
 directory構造を\<file\>へを出力する。
 
-## Options
-
-詳細仕様は[ここ](formal_document_JP.md)にあります。
 
 ## 例
 - `treejson tests/sample`
