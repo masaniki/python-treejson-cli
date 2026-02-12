@@ -4,7 +4,7 @@ import argparse
 import yaml
 import json
 
-VERSION="v1.0.1"
+VERSION="v1.0.2"
 
 def main():
     """
@@ -14,9 +14,9 @@ def main():
         @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
         @Type: dict
     """
-    parser=argparse.ArgumentParser(prog="PROG")
+    parser=argparse.ArgumentParser(prog="treejson")
     parser.add_argument("dirName",type=str,default=None,help="put in directory name. Both absolute and relative is OK.")
-    parser.add_argument("-v","--version",action="version",version=f"treejson {VERSION}")
+    parser.add_argument("-v","--version",action="version",version="%(prog)s"+f"{VERSION}")
     parser.add_argument("-y","--yaml",action="store_true",help="output as a YAML format.")
     parser.add_argument("-a","--all",action="store_true",help="visit hidden file.")
     parser.add_argument("-f","--file",type=str,help="output as a file.")
