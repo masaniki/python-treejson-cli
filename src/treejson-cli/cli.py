@@ -4,7 +4,7 @@ import argparse
 import yaml
 import json
 
-VERSION="v1.0.1"
+VERSION="v1.0.2"
 
 def main():
     """
