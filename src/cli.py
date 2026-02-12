@@ -8,11 +8,11 @@ VERSION="v1.0.1"
 
 def main():
     """
-    Smry: CLIを処理する関数。
+    @Summ: CLIを処理する関数。
 
-    Returns:
-        Type: dict
-        Smry: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
+    @Returns:
+        @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
+        @Type: dict
     """
     parser=argparse.ArgumentParser(prog="PROG")
     parser.add_argument("dirName",type=str,default=None,help="put in directory name. Both absolute and relative is OK.")
@@ -39,29 +39,29 @@ def main():
 
 def directoryBFS(startDir:Path,maxDepth:int=None,isAll:bool=None):
     """
-    Smry: directory構造を幅優先探索する関数。
+    @Summ: directory構造を幅優先探索する関数。
 
-    Args:
+    @Args:
       startDir:
-        Type: Path.
-        Smry: 探索を開始するdirectory名。
+        @Type: Path.
+        @Summ: 探索を開始するdirectory名。
       maxDepth:
-        Type: Int.
-        Smry: 探索の最大の深さ。
-        Expl:
+        @Summ: 探索の最大の深さ。
+        @Desc:
         - current directoryは深さ0。
         - 「maxDepth<現在の深さ」の時に探索打ち切り。
-        Default: 255.
+        @Type: Int.
+        @Default: 255.
       isAll:
-        Type: Bool.
-        Smry: {True⇒隠しfileも探索, False⇒隠しfileを通過。}
-        Default: false.
-    Returns:
-      Type: dict
-      Smry: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
-      Expl:
+        @Summ: {True⇒隠しfileも探索, False⇒隠しfileを通過。}
+        @Default: false.
+        @Type: Bool.
+    @Returns:
+      @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
+      @Desc:
       - {directory名(str):[i(int):i番目の子directory名|file名(str)]}。
       - file名の時は、終端nodeになる。
+      @Type: dict
     """
     if(maxDepth is None):
         maxDepth=255
