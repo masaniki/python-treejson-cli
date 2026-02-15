@@ -49,3 +49,9 @@ directory構造を\<file\>へを出力する。
 - `treejson tests/sample -yf tests/output.yaml`
 
   [tests/output.yaml](../tests/output.yaml)
+
+# ToDo
+
+directoryをmap型の入れ子で表現する。
+
+fileはscalar型を格納することで表現する。
