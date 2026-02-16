@@ -15,7 +15,7 @@ def main():
         @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
     """
     parser=argparse.ArgumentParser(prog="treejson")
-    parser.add_argument("dirName",type=str,default=None,help="put in directory name. Both absolute and relative is OK.")
+    parser.add_argument("dirName",type=str,default=None,help="put in directory name.")
     parser.add_argument("-v","--version",action="version",version="%(prog)s"+f"{VERSION}")
     parser.add_argument("-y","--yaml",action="store_true",help="output as a YAML format.")
     parser.add_argument("-a","--all",action="store_true",help="visit hidden file.")
@@ -94,6 +94,63 @@ def directoryBFS(startDir:Path,maxDepth:int=None,isAll:bool=None):
                 listQueue.append(childDict[childName])
                 depthQueue.append(nextDepth)
     return outDict
+
+class DirectorySearch():
+    """
+    @Summ: directoryを再帰関数で探索する関数。
+
+    @InsVars:
+      maxDepth:
+        @Summ: 探索する最大の深さ。
+        @Desc:
+        - current directoryは深さ0。
+        - defaultでは10。
+        - 「maxDepth<現在の深さ」の時に探索打ち切り。
+        @Type: Int
+      isAll:
+        @Summ: 隠しfileも探索する時にTrue.
+        @Desc: defaultではFalse。
+        @Type: Bool
+      default:
+        @Summ: 終端nodeに代入するscalar値。
+        @Desc: 代入する値はscalar型ならば何でもよい。
+        @SemType: scalar
+    """
+    def __init__(self,maxDepth=None,isAll=None,default=None):
+        if(maxDepth is None):
+            maxDepth=10
+        if(isAll is None):
+            isAll=False
+        if(type(default)==dict):
+            raise TypeError(f"Default value should be scalar.")
+        elif(type(default)==list):
+            raise TypeError(f"Default value should be scalar.")
+        self.maxDepth=maxDepth
+        self.isAll=isAll
+        self.default=default
+    
+    def traversal(self,curPath:Path)->dict:
+        """
+        @Summ: 探索を実行する関数。
+
+        @Desc: fileは探索しない。directoryのみを探索する。
+
+        @Args:
+          curPath:
+            @Summ: 探索するdirectory.
+            @ComeFrom: current path.
+            @Type: Path
+        @Returns:
+          @Summ: 探索結果を記録するdict型かscalar。
+          @SemType: Dict|scalar
+        """
+        if(curPath.is_file()):
+            return self.default
+        outDict={}
+        for childPath in curPath.iterdir():
+            childValue=self.traversal(childPath)
+            outDict[childPath.name]=childValue
+        return outDict
 
 
 if(__name__=="__main__"):
