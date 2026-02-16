@@ -23,8 +23,10 @@ def main():
     parser.add_argument("-m","--max",type=int,help="specify maximum depth.")
     parser.add_argument("-d","--default",type=str,help="Specify default scalar.")
     args=parser.parse_args()
+    if(args.max<0):
+        raise ValueError(f"--max option should be positive integer.")
     dirPath=Path(args.dirName)
-    dirSearch=DirectorySearch(maxDepth=args.depth,isAll=args.all,default=args.default)
+    dirSearch=DirectorySearch(maxDepth=args.max,isAll=args.all,default=args.default)
     outDict=dirSearch.traversal(dirPath)
     if(args.yaml):
         if(args.file is None):
@@ -102,6 +104,9 @@ class DirectorySearch():
     @Summ: directoryを再帰関数で探索する関数。
 
     @InsVars:
+      depth:
+        @Summ: 現在探索している所の深さ。
+        @Type: Int
       maxDepth:
         @Summ: 探索する最大の深さ。
         @Desc:
@@ -130,6 +135,7 @@ class DirectorySearch():
         self.maxDepth=maxDepth
         self.isAll=isAll
         self.default=default
+        self.depth=0
     
     def traversal(self,curPath:Path)->dict:
         """
@@ -146,12 +152,21 @@ class DirectorySearch():
           @Summ: 探索結果を記録するdict型かscalar。
           @SemType: Dict|scalar
         """
+        # fileの探索。
         if(curPath.is_file()):
             return self.default
+        # 深さで枝狩り。
+        self.depth+=1
+        if(self.maxDepth<self.depth):
+           return {}
+        # directoryの探索。
         outDict={}
         for childPath in curPath.iterdir():
+            if(not self.isAll and childPath.name[0]=="."):
+                continue
             childValue=self.traversal(childPath)
             outDict[childPath.name]=childValue
+        self.depth-=1
         return outDict
 
 
