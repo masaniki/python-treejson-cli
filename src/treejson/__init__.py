@@ -1,7 +1,7 @@
 
-from .cli import directoryBFS, main
+from .directorySearch import DirectorySearch, main
 
 __all__=[
-  directoryBFS,
+  DirectorySearch,
   main
 ]
