@@ -4,23 +4,19 @@ import argparse
 import yaml
 import json
 
-VERSION="v1.0.2"
+VERSION="v1.1.0"
 
 def main():
     """
     @Summ: CLIを処理する関数。
-
-    @Returns:
-        @Type: dict
-        @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
     """
     parser=argparse.ArgumentParser(prog="treejson")
-    parser.add_argument("dirName",type=str,default=None,help="put in directory name.")
+    parser.add_argument("dirName",type=str,default=None,help="Put in directory name.")
     parser.add_argument("-v","--version",action="version",version="%(prog)s"+f"{VERSION}")
-    parser.add_argument("-y","--yaml",action="store_true",help="output as a YAML format.")
-    parser.add_argument("-a","--all",action="store_true",help="visit hidden file.")
-    parser.add_argument("-f","--file",type=str,help="output as a file.")
-    parser.add_argument("-m","--max",type=int,help="specify maximum depth.")
+    parser.add_argument("-y","--yaml",action="store_true",help="Output as a YAML format.")
+    parser.add_argument("-a","--all",action="store_true",help="Visit hidden file.")
+    parser.add_argument("-f","--file",type=str,help="Output as a file.")
+    parser.add_argument("-m","--max",type=int,help="Specify maximum depth.")
     parser.add_argument("-d","--default",type=str,help="Specify default scalar.")
     args=parser.parse_args()
     if(args.max<0):
