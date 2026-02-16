@@ -20,10 +20,12 @@ def main():
     parser.add_argument("-y","--yaml",action="store_true",help="output as a YAML format.")
     parser.add_argument("-a","--all",action="store_true",help="visit hidden file.")
     parser.add_argument("-f","--file",type=str,help="output as a file.")
-    parser.add_argument("-d","--depth",type=int,help="specify maximum depth.")
+    parser.add_argument("-m","--max",type=int,help="specify maximum depth.")
+    parser.add_argument("-d","--default",type=str,help="Specify default scalar.")
     args=parser.parse_args()
-    dirname=Path(args.dirName)
-    outDict=directoryBFS(dirname.resolve(),maxDepth=args.depth,isAll=args.all)
+    dirPath=Path(args.dirName)
+    dirSearch=DirectorySearch(maxDepth=args.depth,isAll=args.all,default=args.default)
+    outDict=dirSearch.traversal(dirPath)
     if(args.yaml):
         if(args.file is None):
             yaml.safe_dump(outDict,sys.stdout,allow_unicode=True)
