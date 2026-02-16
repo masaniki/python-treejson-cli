@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "treejson-cli"
-version = "1.0.2"
+version = "1.1.0"
 authors = [
   { name="masaniki", email="masaniki.software@gmail.com" },
 ]
@@ -13,7 +13,7 @@ dependencies = ["PyYAML"]
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Topic :: Terminals",
     "Operating System :: OS Independent",

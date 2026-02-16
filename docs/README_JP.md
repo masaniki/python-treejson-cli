@@ -49,3 +49,26 @@ directory構造を\<file\>へを出力する。
 - `treejson tests/sample -yf tests/output.yaml`
 
   [tests/output.yaml](../tests/output.yaml)
+
+# 仕様
+
+directoryをscalar型とstr型をkeyとするmap型のみで表現する。sequence型(list型)は使わなない。
+
+fileは`{file名(str):何かの値(scalar)}`で表現する。
+
+directoryは`{directory名(str):子要素(map)}`で表現する。
+
+空のdirectoryは`{directory_name: {}}`で表す。
+
+隠しfileとは`.`から始まるfileやdirectoryのことである。
+
+深さは、current directoryを0として、子要素を辿る度に+1される。
+
+# Next To Do
+
+- [ ] Nothing.
+
+# Ideas
+
+file名を探索する際に一部の正規表現に対応する。
+
