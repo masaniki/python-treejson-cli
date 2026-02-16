@@ -16,10 +16,10 @@ def main():
     parser.add_argument("-y","--yaml",action="store_true",help="Output as a YAML format.")
     parser.add_argument("-a","--all",action="store_true",help="Visit hidden file.")
     parser.add_argument("-f","--file",type=str,help="Output as a file.")
-    parser.add_argument("-m","--max",type=int,help="Specify maximum depth.")
-    parser.add_argument("-d","--default",type=str,help="Specify default scalar.")
+    parser.add_argument("-m","--max",type=int,default=10,help="Specify maximum depth.")
+    parser.add_argument("-d","--default",default=None,help="Specify default scalar.")
     args=parser.parse_args()
-    if(args.max<0):
+    if(args.max<1):
         raise ValueError(f"--max option should be positive integer.")
     dirPath=Path(args.dirName)
     dirSearch=DirectorySearch(maxDepth=args.max,isAll=args.all,default=args.default)
@@ -61,11 +61,7 @@ class DirectorySearch():
         @Desc: 代入する値はscalar型ならば何でもよい。
         @SemType: scalar
     """
-    def __init__(self,maxDepth=None,isAll=None,default=None):
-        if(maxDepth is None):
-            maxDepth=10
-        if(isAll is None):
-            isAll=False
+    def __init__(self,maxDepth,isAll,default):
         if(type(default)==dict):
             raise TypeError(f"Default value should be scalar.")
         elif(type(default)==list):
