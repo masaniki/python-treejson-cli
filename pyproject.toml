@@ -13,7 +13,7 @@ dependencies = ["PyYAML"]
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Topic :: Terminals",
     "Operating System :: OS Independent",
