@@ -50,6 +50,12 @@ directory構造を\<file\>へを出力する。
 
   [tests/output.yaml](../tests/output.yaml)
 
+# 仕様
+
+directoryをscalar型とstr型をkeyとするmap型のみで表現する。sequence型(list型)は使わなない。
+
+
+
 # ToDo
 
 directoryをmap型の入れ子で表現する。

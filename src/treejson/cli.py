@@ -8,11 +8,11 @@ VERSION="v1.0.2"
 
 def main():
     """
-    Smry: CLIを処理する関数。
+    @Summ: CLIを処理する関数。
 
-    Returns:
-        Type: dict
-        Smry: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
+    @Returns:
+        @Type: dict
+        @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
     """
     parser=argparse.ArgumentParser(prog="treejson")
     parser.add_argument("dirName",type=str,default=None,help="put in directory name. Both absolute and relative is OK.")
@@ -26,10 +26,10 @@ def main():
     outDict=directoryBFS(dirname.resolve(),maxDepth=args.depth,isAll=args.all)
     if(args.yaml):
         if(args.file is None):
-            yaml.safe_dump(outDict,sys.stdout)
+            yaml.safe_dump(outDict,sys.stdout,allow_unicode=True)
         else:
             with open(args.file,mode="w",encoding="utf-8") as f:
-                yaml.safe_dump(outDict,f)
+                yaml.safe_dump(outDict,f,allow_unicode=True)
     else:
         if(args.file is None):
             print(outDict)
@@ -39,27 +39,27 @@ def main():
 
 def directoryBFS(startDir:Path,maxDepth:int=None,isAll:bool=None):
     """
-    Smry: directory構造を幅優先探索する関数。
+    @Summ: directory構造を幅優先探索する関数。
 
-    Args:
+    @Args:
       startDir:
-        Type: Path.
-        Smry: 探索を開始するdirectory名。
+        @Type: Path.
+        @Summ: 探索を開始するdirectory名。
       maxDepth:
-        Type: Int.
-        Smry: 探索の最大の深さ。
-        Expl:
+        @Type: Int.
+        @Summ: 探索の最大の深さ。
+        @Desc:
         - current directoryは深さ0。
         - 「maxDepth<現在の深さ」の時に探索打ち切り。
-        Default: 255.
+        @Default: 255.
       isAll:
-        Type: Bool.
-        Smry: {True⇒隠しfileも探索, False⇒隠しfileを通過。}
-        Default: false.
-    Returns:
-      Type: dict
-      Smry: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
-      Expl:
+        @Type: Bool.
+        @Summ: {True⇒隠しfileも探索, False⇒隠しfileを通過。}
+        @Default: false.
+    @Returns:
+      @Type: dict
+      @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
+      @Desc:
       - {directory名(str):[i(int):i番目の子directory名|file名(str)]}。
       - file名の時は、終端nodeになる。
     """
