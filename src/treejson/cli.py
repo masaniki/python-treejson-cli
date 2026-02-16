@@ -41,64 +41,6 @@ def main():
             with open(args.file,mode="w",encoding="utf-8") as f:
                 json.dump(outDict,f)
 
-def directoryBFS(startDir:Path,maxDepth:int=None,isAll:bool=None):
-    """
-    @Summ: directory構造を幅優先探索する関数。
-
-    @Args:
-      startDir:
-        @Type: Path.
-        @Summ: 探索を開始するdirectory名。
-      maxDepth:
-        @Type: Int.
-        @Summ: 探索の最大の深さ。
-        @Desc:
-        - current directoryは深さ0。
-        - 「maxDepth<現在の深さ」の時に探索打ち切り。
-        @Default: 255.
-      isAll:
-        @Type: Bool.
-        @Summ: {True⇒隠しfileも探索, False⇒隠しfileを通過。}
-        @Default: false.
-    @Returns:
-      @Type: dict
-      @Summ: {directory名(str):[i(int):i番目の子directory名(str)]}という木構造。
-      @Desc:
-      - {directory名(str):[i(int):i番目の子directory名|file名(str)]}。
-      - file名の時は、終端nodeになる。
-    """
-    if(maxDepth is None):
-        maxDepth=255
-    if(isAll is None):
-        isAll=False
-    outDict={startDir.name:[]}
-    visitQueue=[startDir]  #訪れるdirectory(Path型)を格納する。
-    listQueue=[outDict[startDir.name]]  #訪れるdirectoryの子要素のlist型を格納する。
-    depthQueue=[0]  #訪れるdiectoryの深さ(int型)を格納する。
-    while(True):
-        if(visitQueue==[]):
-            break
-        curDir=visitQueue.pop(0)
-        curList=listQueue.pop(0)
-        curDepth=depthQueue.pop(0)
-        nextDepth=curDepth+1
-        if(maxDepth<nextDepth):
-            continue
-        for childPath in curDir.iterdir():
-            childName=childPath.name
-            firstChr=childName[0]
-            if((not isAll) and firstChr=='.'):
-                continue
-            if(childPath.is_file()):
-                curList.append(childName)
-            else:
-                childDict={childName:[]}
-                curList.append(childDict)
-                visitQueue.append(childPath)
-                listQueue.append(childDict[childName])
-                depthQueue.append(nextDepth)
-    return outDict
-
 class DirectorySearch():
     """
     @Summ: directoryを再帰関数で探索する関数。
